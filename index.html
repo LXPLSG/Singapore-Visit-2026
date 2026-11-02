@@ -189,8 +189,6 @@ setInterval(refreshTripDay,60000);
 window.addEventListener('pageshow',refreshTripDay);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshTripDay()});
 window.__ITINERARY_TEST__={days,findItem,selectDay,openDetail,closeDetail};
-</script>
-<script>
 // Reviewed Simplified Chinese copy; English itinerary data remains the source of truth.
 const zhItems={
 jewel:{title:'星耀樟宜',summary:'雨漩涡、室内森林与午餐',intro:'星耀樟宜不只是一处机场购物场所。室内森林与中央瀑布，让旅程一开始就能感受到新加坡将自然景观与大型建筑融为一体的特色。建议从不同楼层欣赏瀑布，留意环绕观景平台的植物，并在离开机场区域前预留时间好好吃顿午餐。',visitGuide:'游览建议：先以雨漩涡为中心熟悉环境，再沿森林谷走一小圈，之后到松发吃午餐。请把行李安排及前往市区的交通时间考虑在内。12:00 是计划开始游览的时间，并不代表一定能在此前完成入境手续。',tips:'先拍瀑布、在森林谷短暂散步，再到松发吃午餐。为保障后续行程时间，本次不安排需购票的星空花园项目。'},
@@ -245,8 +243,6 @@ const zhSubs=[
 ['黑胡椒蟹','黑胡椒蟹适合偏好胡椒香味的人。如人数够多，可以比较不同烹调方式，但每只蟹的大小与价格都应分别确认。它是另一种选择或加点菜式，并非套餐必然包含的项目。'],
 ['共享海鲜与蔬菜','蔬菜与其他共享菜肴，有助平衡较浓郁的螃蟹晚餐。请店员按全桌食量及饮食需求，建议份量与当天选择。精简而均衡的点单，能留出胃口好好享用招牌蟹与馒头。']
 ];
-</script>
-<script>
 const zhBreakfast={
 malay:{cuisine:'马来美食',name:'甘榜格南咖啡馆',address:'巴梭拉街17号（17 Bussorah Street）',food:'椰浆饭或当天供应的其他马来式早餐，搭配咖啡或茶。',intro:'这家邻里咖啡馆提供家常马来菜，并设有临街座位。若想在甘榜格南享用咸香早餐，再轻松步行至清真寺，可选择这里。',hours:'星期日早晨：各平台列出的开门时间介于7:00至8:00，均涵盖计划中的9:00早餐时段。',walk:'步行约3–5分钟',best:'咸香马来风味，以及巴梭拉街的街区氛围。',caption:'甘榜格南咖啡馆外观'},
 indian:{cuisine:'印度美食',name:'新加坡 Zam Zam 餐厅',address:'桥北路697–699号（697–699 North Bridge Road）',food:'印度煎饼（roti prata）或共享一份肉馅煎饼（murtabak），搭配拉茶；抵达后请确认早餐菜单。',intro:'这家历史悠久的印度穆斯林餐馆位于苏丹回教堂对面，适合享用热腾腾的咸味早餐。中午已安排鸡饭午餐，因此肉馅煎饼可点一份共享，避免早餐吃得过饱。',hours:'据餐厅公布，星期日7:00开门。',walk:'步行约2–3分钟，含过马路时间',best:'印度煎饼或肉馅煎饼，以及前往清真寺的最短步行距离。',caption:'新加坡 Zam Zam 餐厅餐点或店面'},
