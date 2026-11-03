@@ -194,9 +194,9 @@ function loadPhotos(){document.querySelectorAll('img[data-photo]').forEach(el=>{
 new MutationObserver(()=>{document.querySelectorAll('.activity').forEach(card=>{const button=card.querySelector('button.explore');const match=button&&button.getAttribute('onclick').match(/openDetail\('([^']+)'\)/);if(match&&!card.dataset.introduced){card.dataset.introduced='true';card.querySelector('.summary').textContent=findItem(match[1]).intro}});enhanceGuideViews()}).observe(document.body,{childList:true,subtree:true});
 const maps=(place)=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place+', Singapore')}`;
 function renderSwitch(){daySwitch.innerHTML=days.map((d,i)=>`<button class="day-btn ${i===selected?'active':''}" onclick="selectDay(${i})">${d.short}</button>`).join('')}
-function renderToday(){const d=days[selected];todayTitle.textContent=d.date;todaySubtitle.textContent=d.theme;todayCount.textContent=`${d.items.length} stops`;timeline.innerHTML=d.items.map(x=>`<article class="activity">${img(x.photos[0],x.title)}<div class="card-body"><div class="time">${x.time}</div><h3>${x.title}</h3><p class="summary">${x.summary}</p><div class="actions"><a class="action navigate" href="${maps(x.place)}" target="_blank" rel="noopener" aria-label="Navigate to ${x.title}">↗ Navigate</a><button class="action explore" onclick="openDetail('${x.id}')">Explore →</button></div></div></article>`).join('')||'<div class="empty">No activities.</div>'}
+function renderToday(){const d=days[selected];todayTitle.textContent=d.date;todaySubtitle.textContent=d.theme;todayCount.textContent=`${d.items.length} stops`;timeline.innerHTML=d.items.map(x=>`<article class="activity" data-item-id="${x.id}">${img(x.photos[0],x.title)}<div class="card-body"><div class="time">${x.time}</div><h3>${x.title}</h3><p class="summary">${x.summary}</p><div class="actions"><a class="action navigate" href="${maps(x.place)}" target="_blank" rel="noopener" aria-label="Navigate to ${x.title}">↗ Navigate</a><button class="action explore" onclick="openDetail('${x.id}')">Explore →</button></div></div></article>`).join('')||'<div class="empty">No activities.</div>'}
 function selectDay(i){selected=i;renderSwitch();renderToday();window.scrollTo({top:150,behavior:'smooth'})}
-function renderPlan(){fullPlan.innerHTML=days.map((d,i)=>`<article class="day-block ${i===0?'open':''}"><button class="day-summary" aria-expanded="${i===0}" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))"><span class="date-box"><b>${i+7}</b><span>Nov</span></span><span><h3>${d.date}</h3><p>${d.theme} · ${d.items.length} stops</p></span><span class="chev">⌄</span></button><div class="plan-list">${d.items.map(x=>`<article class="plan-item"><details class="main-activity"><summary class="main-summary"><span class="main-number">${activityNumber(x)}</span>${img(x.photos[0],x.title)}<span class="main-label"><span class="plan-time">${x.time}</span><strong>${x.title}</strong><span class="main-child-count">${x.attractions.length} subactivities</span></span><span class="main-toggle" aria-hidden="true">＋</span></summary><div class="main-body"><div class="plan-description"><b class="parent-title">${x.title}</b><p class="plan-intro">${x.intro}</p><div class="actions"><a class="action navigate" href="${maps(x.place)}" target="_blank" rel="noopener">↗ Navigate</a><button class="action explore" onclick="openDetail('${x.id}')">Explore →</button></div></div></div></details></article>`).join('')}</div></article>`).join('')}
+function renderPlan(){fullPlan.innerHTML=days.map((d,i)=>`<article class="day-block ${i===0?'open':''}"><button class="day-summary" aria-expanded="${i===0}" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))"><span class="date-box"><b>${i+7}</b><span>Nov</span></span><span><h3>${d.date}</h3><p>${d.theme} · ${d.items.length} stops</p></span><span class="chev">⌄</span></button><div class="plan-list">${d.items.map(x=>`<article class="plan-item"><details class="main-activity" data-item-id="${x.id}"><summary class="main-summary"><span class="main-number">${activityNumber(x)}</span>${img(x.photos[0],x.title)}<span class="main-label"><span class="plan-time">${x.time}</span><strong>${x.title}</strong><span class="main-child-count">${x.attractions.length} subactivities</span></span><span class="main-toggle" aria-hidden="true">＋</span></summary><div class="main-body"><div class="plan-description"><b class="parent-title">${x.title}</b><p class="plan-intro">${x.intro}</p><div class="actions"><a class="action navigate" href="${maps(x.place)}" target="_blank" rel="noopener">↗ Navigate</a><button class="action explore" onclick="openDetail('${x.id}')">Explore →</button></div></div></div></details></article>`).join('')}</div></article>`).join('')}
 function findItem(id){for(const d of days){const x=d.items.find(v=>v.id===id);if(x)return x}}
 function openDetail(id){const x=findItem(id);if(!x)return;previousFocus=document.activeElement;detailBody.innerHTML=`<button class="back" onclick="closeDetail()" aria-label="Close activity detail">←</button><div class="gallery">${x.photos.map((p,i)=>img(p,`${x.title} photo ${i+1}`)).join('')}<div class="gallery-shade"></div><span class="gallery-label">Swipe photos · ${x.photos.length}</span></div><section class="detail-content"><div class="detail-kicker">${x.time}</div><h2>${x.title}</h2><p class="intro">${x.intro}</p><div class="tip"><b>Key tip</b>${x.tips}</div><div class="count">What to see & try</div><div class="attractions">${x.attractions.map((a,i)=>`<article class="attraction"><span class="num">${i+1}</span><div><h3>${a[0]}</h3><p>${a[1]}</p></div></article>`).join('')}</div><div class="detail-actions"><button class="action secondary" onclick="closeDetail()">← Back</button><a class="action explore" href="${maps(x.place)}" target="_blank" rel="noopener">↗ Navigate</a></div></section>`;detail.classList.add('open');document.body.style.overflow='hidden';detail.scrollTop=0;detail.querySelector('.back').focus()}
 function closeDetail(){detail.classList.remove('open');document.body.style.overflow='';if(previousFocus)previousFocus.focus()}
@@ -495,7 +495,37 @@ spots.forEach((s,i)=>{
  const item=document.createElement('button');item.type='button';item.className='photo-guide-master-item';item.innerHTML='<span class="photo-guide-master-id">'+s.id+'</span><span class="photo-guide-master-copy"><strong>'+s.title+'</strong><span>'+s.activity+'</span></span><span class="photo-guide-master-arrow">→</span>';item.setAttribute('aria-label',s.id+': '+s.title);item.onclick=()=>showDetail(i);masterList.appendChild(item);
  const d=document.createElement('button');d.type='button';d.className='photo-guide-dot';d.setAttribute('aria-label','Photo spot '+(i+1)+': '+s.title);d.onclick=()=>{index=i;render();guide.scrollTo({top:0,behavior:'smooth'})};dots.appendChild(d)
 });
-function enhanceCards(){document.querySelectorAll('.activity,.main-activity').forEach(card=>{const text=(card.textContent||'').toLowerCase();const first=spots.findIndex(s=>s.match.some(m=>text.includes(m.toLowerCase())));if(first<0)return;const actions=card.querySelector('.actions');if(!actions||actions.querySelector('.photo-guide-trigger'))return;const b=document.createElement('button');b.type='button';b.className='action photo-guide-trigger';b.textContent='◎ Photo Spots';b.setAttribute('aria-label','Open photo guide for '+spots[first].activity);b.onclick=()=>openGuide(first);actions.appendChild(b)})}
+const itinerarySpotIds={
+  jewel:'J1',
+  marina:'M2',
+  gardens:'G1',
+  laupasat:'L1',
+  kampong:'K1',
+  civic:'V1',
+  hillstreet:'V6',
+  chinatown:'T1'
+};
+function enhanceCards(){
+  document.querySelectorAll('.activity,.main-activity').forEach(card=>{
+    const itemId=card.dataset.itemId;
+    const spotId=itinerarySpotIds[itemId];
+    let first=spotId?spots.findIndex(s=>s.id===spotId):-1;
+    if(first<0){
+      const text=(card.textContent||'').toLowerCase();
+      first=spots.findIndex(s=>s.match.some(m=>text.includes(m.toLowerCase())));
+    }
+    if(first<0)return;
+    const actions=card.querySelector('.actions');
+    if(!actions||actions.querySelector('.photo-guide-trigger'))return;
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='action photo-guide-trigger';
+    b.textContent='◎ Photo Spots';
+    b.setAttribute('aria-label','Open photo guide for '+spots[first].activity);
+    b.onclick=()=>openGuide(first);
+    actions.appendChild(b);
+  });
+}
 enhanceCards();new MutationObserver(enhanceCards).observe(document.querySelector('main.app'),{childList:true,subtree:true});
 document.querySelector('.photo-guide-fab').onclick=openMaster;
 back.onclick=()=>{if(mode==='detail')showMaster();else closeGuide()};
