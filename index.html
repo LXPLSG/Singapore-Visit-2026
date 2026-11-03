@@ -312,7 +312,9 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 
 <!-- Additive Photo Guide: isolated from the existing itinerary UI -->
 <style data-photo-guide-addon>
+.actions{flex-wrap:wrap}
 .photo-guide-trigger{background:#fff4db;color:#76510d;border:1px solid #ead19b}
+.photo-guide-fab{position:fixed;z-index:35;right:max(16px,calc((100vw - 760px)/2 + 16px));bottom:calc(78px + env(safe-area-inset-bottom));border:0;border-radius:999px;padding:12px 16px;background:var(--gold);color:#302007;font-size:.78rem;font-weight:900;box-shadow:0 10px 28px rgba(16,36,42,.24)}
 #photoGuide{display:none;position:fixed;z-index:90;inset:0;background:var(--paper);overflow-y:auto}
 #photoGuide.open{display:block}
 .photo-guide-shell{max-width:760px;min-height:100vh;margin:auto;padding:calc(16px + env(safe-area-inset-top)) 16px calc(26px + env(safe-area-inset-bottom))}
@@ -325,17 +327,19 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 .photo-guide-kicker{color:var(--coral);font-size:.73rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
 .photo-guide-copy h2{font-family:Georgia,serif;font-size:1.9rem;line-height:1.05;margin:7px 0 10px}
 .photo-guide-copy p{color:#4f6268;font-size:.92rem;line-height:1.65;margin:8px 0}
+.photo-guide-id{display:inline-block;margin-left:7px;color:var(--muted);font-weight:800}
 .photo-guide-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .photo-guide-links .action{padding:11px 13px}
 .photo-guide-nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
 .photo-guide-nav button{border:0;border-radius:14px;padding:13px;font-weight:850}
 .photo-guide-prev{background:#fff;border:1px solid var(--line)!important;color:var(--ink)}
 .photo-guide-next{background:var(--teal);color:#fff}
-.photo-guide-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:14px 0 0}
-.photo-guide-dot{width:7px;height:7px;border:0;padding:0;border-radius:50%;background:#c6d2ce}
+.photo-guide-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin:14px 0 0}
+.photo-guide-dot{width:8px;height:8px;border:0;padding:0;border-radius:50%;background:#c6d2ce}
 .photo-guide-dot.active{background:var(--teal);transform:scale(1.35)}
-@media(max-width:420px){.photo-guide-copy h2{font-size:1.6rem}.photo-guide-image{height:34vh}}
+@media(max-width:420px){.photo-guide-copy h2{font-size:1.55rem}.photo-guide-image{height:34vh}.photo-guide-fab{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));padding:12px 14px}.actions .action{flex:1 1 auto;min-height:42px}}
 </style>
+<button class="photo-guide-fab" type="button" aria-label="Open Photo Guide">◎ Photo Guide</button>
 <section id="photoGuide" aria-hidden="true" aria-label="Photo spots guide">
   <div class="photo-guide-shell">
     <div class="photo-guide-top">
@@ -345,13 +349,13 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
     <article class="photo-guide-card">
       <img class="photo-guide-image" alt="">
       <div class="photo-guide-copy">
-        <div class="photo-guide-kicker">Photo spot</div>
+        <div class="photo-guide-kicker">Photo spot <span class="photo-guide-id"></span></div>
         <h2></h2>
         <p class="photo-guide-activity"></p>
         <p class="photo-guide-viewpoint"></p>
         <div class="photo-guide-links">
           <a class="action explore photo-guide-map" target="_blank" rel="noopener">↗ Map search</a>
-          <a class="action secondary photo-guide-reference" target="_blank" rel="noopener">Reference images ↗</a>
+          <a class="action secondary photo-guide-reference" target="_blank" rel="noopener">Photo source ↗</a>
         </div>
       </div>
     </article>
@@ -364,31 +368,36 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 </section>
 <script data-photo-guide-addon>
 (()=>{
+const commons=name=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(name)+'?width=1200';
+const commonsPage=name=>'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(name);
 const spots=[
-{title:'Jewel Rain Vortex',activity:'Jewel Changi Airport',match:['Jewel Changi Airport'],view:'Stand on the upper-level railing opposite the waterfall. Use the circular roof opening as a frame and keep the full drop visible; a slightly low angle adds scale.',map:'Jewel Rain Vortex',ref:'Jewel Rain Vortex Singapore photography'},
-{title:'Merlion with Marina Bay',activity:'Merlion Park',match:['Merlion Park'],view:'Move to the waterfront edge just east of the statue. Frame the Merlion in the foreground with Marina Bay Sands across the water; step back for the full water arc.',map:'Merlion Park Singapore',ref:'Merlion Park Marina Bay Sands photo'},
-{title:'Marina Bay Sands skyline',activity:'Marina Bay promenade',match:['Marina Bay'],view:'Use the promenade railing as a leading line and shoot across the bay. The clearest symmetrical view comes from the Merlion side of the water.',map:'Marina Bay waterfront promenade Singapore',ref:'Marina Bay Sands skyline promenade photo'},
-{title:'Supertree Grove',activity:'Gardens by the Bay',match:['Gardens by the Bay'],view:'Stand near the centre of the grove and angle upward so several Supertrees converge. For people shots, place the subject low in frame to preserve the canopy.',map:'Supertree Grove Singapore',ref:'Supertree Grove best photo angle'},
-{title:'Sultan Mosque from Bussorah Street',activity:'Kampong Glam',match:['Kampong Glam','Sultan Mosque'],view:'Stand near the pedestrian end of Bussorah Street and centre the golden dome above the shop-house corridor. A modest zoom compresses the street and dome neatly.',map:'Bussorah Street Sultan Mosque Singapore',ref:'Sultan Mosque Bussorah Street photo'},
-{title:'Bussorah Street shop-houses',activity:'Kampong Glam',match:['Kampong Glam','Bussorah Street'],view:'Turn away from the mosque for colourful façades and café details. Shoot from the side of the pedestrian lane so the repeating shop fronts create depth.',map:'Bussorah Street Singapore',ref:'Bussorah Street shophouses photography'},
-{title:'Haji Lane murals',activity:'Kampong Glam',match:['Kampong Glam','Haji Lane'],view:'Pick one mural as the background rather than capturing the whole lane. Keep doorways clear and photograph early in the walk before the narrow lane becomes busy.',map:'Haji Lane Singapore',ref:'Haji Lane murals photography'},
-{title:'CHIJMES Gothic courtyard',activity:'Civic District walk',match:['Civic District','CHIJMES'],view:'From the open lawn, centre the chapel façade and leave space around the spire. A low viewpoint helps separate the white architecture from surrounding buildings.',map:'CHIJMES Singapore',ref:'CHIJMES chapel courtyard photo'},
-{title:"St Andrew's Cathedral",activity:'Civic District walk',match:['Civic District',"St Andrew's Cathedral"],view:'Step back toward the Padang side to fit the spire and long white façade. Use nearby trees at the edge of frame for scale without blocking the building.',map:"St Andrew's Cathedral Singapore",ref:"St Andrew's Cathedral Singapore photography"},
-{title:'National Gallery façade',activity:'Civic District walk',match:['Civic District','National Gallery'],view:'Photograph from the Padang edge for a balanced view of the columns and steps. Keep vertical lines straight by holding the phone level and cropping later.',map:'National Gallery Singapore',ref:'National Gallery Singapore exterior photo'},
-{title:'Buddha Tooth Relic Temple',activity:'Chinatown walk',match:['Chinatown','Buddha Tooth Relic Temple'],view:'Use the opposite side of South Bridge Road for the complete red façade, or frame it from Sago Street for a layered street view. Watch traffic and cross only at marked crossings.',map:'Buddha Tooth Relic Temple Singapore',ref:'Buddha Tooth Relic Temple exterior photo'},
-{title:'Clarke Quay from Read Bridge',activity:'Singapore River walk',match:['Clarke Quay','Singapore River'],view:'Pause near the centre of Read Bridge and face the colourful riverside buildings. Keep the river in the lower third so reflections lead into the quay.',map:'Read Bridge Clarke Quay Singapore',ref:'Clarke Quay Read Bridge photo'}
+{id:'J1',title:'Jewel Rain Vortex — Ground Level',activity:'Jewel Changi Airport',match:['Jewel Changi Airport'],image:commons('Jewel Changi Airport Rain Vortex.jpg'),source:commonsPage('Jewel Changi Airport Rain Vortex.jpg'),view:'Photograph from the ground-level viewing area with the Rain Vortex centred above the circular basin. A wide composition should include the surrounding terraces to show scale.',map:'Jewel Rain Vortex ground level Singapore'},
+{id:'J2',title:'Jewel Rain Vortex — Upper Level',activity:'Jewel Changi Airport',match:['Jewel Changi Airport'],image:commons('Rain Vortex at Jewel Changi Airport.jpg'),source:commonsPage('Rain Vortex at Jewel Changi Airport.jpg'),view:'Use an upper-level railing opposite the waterfall. Frame the roof opening and the full drop, while keeping the railing out of the lower edge of the photograph.',map:'Jewel Rain Vortex upper level Singapore'},
+{id:'M2',title:'ArtScience Museum Exterior',activity:'Marina Bay Sands & Waterfront',match:['Marina Bay Sands','Waterfront'],image:commons('ArtScience Museum and Marina Bay Sands, Singapore.jpg'),source:commonsPage('ArtScience Museum and Marina Bay Sands, Singapore.jpg'),view:'Stand along the waterfront promenade and leave clear space around the lotus-shaped building. Shoot slightly across the water to include its reflection when conditions allow.',map:'ArtScience Museum Singapore'},
+{id:'M7',title:'Garden Bay Bridge',activity:'Marina Bay Sands & Waterfront',match:['Marina Bay Sands','Waterfront'],image:commons('Marina Bay Sands from Gardens by the Bay.jpg'),source:'https://www.gardensbythebay.com.sg/en/plan-your-visit/getting-here.html',view:'Use the elevated Garden Bay Bridge as the viewpoint between Marina Bay Sands and the gardens. Photograph along the bridge or outward toward the garden skyline, keeping the leading lines straight.',map:'Garden Bay Bridge Marina Bay Sands Singapore'},
+{id:'G1',title:'Supertree Grove',activity:'Gardens by the Bay',match:['Gardens by the Bay'],image:commons('OCBC Skyway and Supertree Grove at Gardens by the Bay.jpg'),source:commonsPage('OCBC Skyway and Supertree Grove at Gardens by the Bay.jpg'),view:'Stand near the centre of the grove and angle upward so several Supertrees converge. For a portrait, keep the person low in frame so the canopies remain visible.',map:'Supertree Grove Singapore'},
+{id:'G7',title:'Water Lily Pond',activity:'Gardens by the Bay',match:['Gardens by the Bay'],image:'https://images.unsplash.com/photo-1734956984755-499255b49621?auto=format&fit=crop&w=1200&q=82',source:'https://unsplash.com/photos/a-pond-filled-with-lots-of-water-lilies-_U3-TMLJRvc',view:'Photograph across the pond with water lilies in the foreground and the Supertrees or Marina Bay Sands in the distance. Keep the camera low enough to separate the flowers from the skyline.',map:'Water Lily Pond Gardens by the Bay Singapore'},
+{id:'L1',title:'Lau Pa Sat Exterior',activity:'Lau Pa Sat & Satay Street',match:['Lau Pa Sat','Satay Street'],image:commons('Lau Pa Sat, Singapore - 20150418.jpg'),source:commonsPage('Lau Pa Sat, Singapore - 20150418.jpg'),view:'Stand across the street where the full octagonal market and its clock tower are visible. Keep the phone level and use the surrounding modern towers to emphasise the contrast in architecture.',map:'Lau Pa Sat Singapore'},
+{id:'K1',title:'Sultan Mosque from Bussorah Street',activity:'Kampong Glam Heritage Walk',match:['Kampong Glam','Sultan Mosque'],image:commons('Bussorah Street, Kampong Glam, Singapore.jpg'),source:commonsPage('Bussorah Street, Kampong Glam, Singapore.jpg'),view:'Stand near the pedestrian end of Bussorah Street and centre the golden dome above the shophouse corridor. A modest zoom compresses the street and mosque cleanly.',map:'Bussorah Street Sultan Mosque Singapore'},
+{id:'K3',title:'Haji Lane Street Art',activity:'Kampong Glam Heritage Walk',match:['Kampong Glam','Haji Lane'],image:commons('Haji Lane, Singapore.jpg'),source:commonsPage('Haji Lane, Singapore.jpg'),view:'Choose one mural as the background instead of trying to capture the entire lane. Keep doorways and the narrow pedestrian route clear while composing the shot.',map:'Haji Lane street art Singapore'},
+{id:'V1',title:'CHIJMES Chapel',activity:'Civic District Heritage Walk',match:['Civic District','CHIJMES'],image:commons('CHIJMES Singapore.jpg'),source:commonsPage('CHIJMES Singapore.jpg'),view:'From the open lawn, centre the white Gothic chapel and leave breathing room around its spire. A slightly low viewpoint separates the architecture from nearby buildings.',map:'CHIJMES Chapel Singapore'},
+{id:'V6',title:'Old Hill Street Police Station',activity:'Civic District Heritage Walk',match:['Civic District','CHIJMES'],image:commons('Old Hill Street Police Station, October 2025.jpg'),source:commonsPage('Old Hill Street Police Station, October 2025.jpg'),view:'Photograph from the opposite side of Hill Street at a safe crossing point. Hold the phone level so the long façade and rows of coloured shutters remain straight.',map:'Old Hill Street Police Station Singapore'},
+{id:'T1',title:'Buddha Tooth Relic Temple',activity:'Chinatown & Buddha Tooth Relic Temple',match:['Chinatown','Buddha Tooth Relic Temple'],image:commons('Buddha Tooth Relic Temple, Chinatown, Singapore.jpg'),source:commonsPage('Buddha Tooth Relic Temple, Chinatown, Singapore.jpg'),view:'Use the opposite side of South Bridge Road for the complete red façade, or frame it from Sago Street for a layered street view. Cross only at marked crossings.',map:'Buddha Tooth Relic Temple Singapore'},
+{id:'T4',title:'Sri Mariamman Temple',activity:'Chinatown & Buddha Tooth Relic Temple',match:['Chinatown','Buddha Tooth Relic Temple'],image:commons('Gopuram monumental ornate tower at the entrance of Sri Mariamman Temple with sculptures of Hindu deities Chinatown Singapore.jpg'),source:commonsPage('Gopuram monumental ornate tower at the entrance of Sri Mariamman Temple with sculptures of Hindu deities Chinatown Singapore.jpg'),view:'Stand across South Bridge Road and centre the colourful gopuram above the entrance. A portrait-oriented frame preserves the tower’s height and sculptural detail.',map:'Sri Mariamman Temple Singapore'}
 ];
-const guide=document.getElementById('photoGuide'), img=guide.querySelector('.photo-guide-image'), title=guide.querySelector('h2'), activity=guide.querySelector('.photo-guide-activity'), viewpoint=guide.querySelector('.photo-guide-viewpoint'), count=guide.querySelector('.photo-guide-count'), map=guide.querySelector('.photo-guide-map'), ref=guide.querySelector('.photo-guide-reference'), dots=guide.querySelector('.photo-guide-dots');
+if(typeof addTranslation==='function'){
+addTranslation('◎ Photo Guide','◎ 拍照指南');addTranslation('◎ Photo Spots','◎ 拍照地点');addTranslation('← Return to itinerary','← 返回行程');addTranslation('Photo spot','拍照地点');addTranslation('↗ Map search','↗ 地图搜索');addTranslation('Photo source ↗','照片来源 ↗');addTranslation('← Previous','← 上一个');addTranslation('Next →','下一个 →');addTranslation('Back to first','返回第一个');
+}
+const guide=document.getElementById('photoGuide'),img=guide.querySelector('.photo-guide-image'),title=guide.querySelector('h2'),activity=guide.querySelector('.photo-guide-activity'),viewpoint=guide.querySelector('.photo-guide-viewpoint'),count=guide.querySelector('.photo-guide-count'),id=guide.querySelector('.photo-guide-id'),map=guide.querySelector('.photo-guide-map'),ref=guide.querySelector('.photo-guide-reference'),dots=guide.querySelector('.photo-guide-dots');
 let index=0,returnFocus=null;
 const encode=q=>encodeURIComponent(q);
-function findImage(spot){const cards=[...document.querySelectorAll('.activity,.main-activity,.sub-guide,.detail')];for(const card of cards){const t=(card.textContent||'').toLowerCase();if(spot.match.some(m=>t.includes(m.toLowerCase()))){const im=card.querySelector('img');if(im?.src)return im.src}}return '';}
-function render(){const s=spots[index];title.textContent=s.title;activity.textContent=s.activity;viewpoint.textContent=s.view;count.textContent=(index+1)+' / '+spots.length;map.href='https://www.google.com/maps/search/?api=1&query='+encode(s.map);ref.href='https://www.google.com/search?tbm=isch&q='+encode(s.ref);const src=findImage(s);img.src=src;img.alt=s.title+' reference view';img.hidden=!src;guide.querySelector('.photo-guide-prev').disabled=index===0;guide.querySelector('.photo-guide-next').textContent=index===spots.length-1?'Back to first':'Next →';dots.querySelectorAll('button').forEach((d,i)=>d.classList.toggle('active',i===index));}
-function openGuide(i=0){index=i;returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render();guide.querySelector('.photo-guide-back').focus();}
-function closeGuide(){guide.classList.remove('open');guide.setAttribute('aria-hidden','true');document.body.style.overflow='';returnFocus?.focus();}
+function render(){const s=spots[index];title.textContent=s.title;activity.textContent=s.activity;viewpoint.textContent=s.view;id.textContent=s.id;count.textContent=(index+1)+' / '+spots.length;map.href='https://www.google.com/maps/search/?api=1&query='+encode(s.map);ref.href=s.source;img.src=s.image;img.alt=s.title+' reference photograph';guide.querySelector('.photo-guide-prev').disabled=index===0;guide.querySelector('.photo-guide-next').textContent=index===spots.length-1?'Back to first':'Next →';dots.querySelectorAll('button').forEach((d,i)=>d.classList.toggle('active',i===index))}
+function openGuide(i=0){index=i;returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render();guide.scrollTo(0,0);guide.querySelector('.photo-guide-back').focus()}
+function closeGuide(){guide.classList.remove('open');guide.setAttribute('aria-hidden','true');document.body.style.overflow='';returnFocus?.focus()}
 spots.forEach((s,i)=>{const d=document.createElement('button');d.type='button';d.className='photo-guide-dot';d.setAttribute('aria-label','Photo spot '+(i+1)+': '+s.title);d.onclick=()=>{index=i;render();guide.scrollTo({top:0,behavior:'smooth'})};dots.appendChild(d)});
-function enhanceCards(){document.querySelectorAll('.activity,.main-activity').forEach(card=>{const text=(card.textContent||'').toLowerCase();const indices=spots.map((s,i)=>s.match.some(m=>text.includes(m.toLowerCase()))?i:-1).filter(i=>i>=0);if(!indices.length)return;const actions=card.querySelector('.actions');if(!actions||actions.querySelector('.photo-guide-trigger'))return;const b=document.createElement('button');b.type='button';b.className='action photo-guide-trigger';b.textContent='◎ Photo Spots';b.onclick=()=>openGuide(indices[0]);actions.appendChild(b)})}
-enhanceCards();
-new MutationObserver(enhanceCards).observe(document.querySelector('main.app'),{childList:true,subtree:true});
+function enhanceCards(){document.querySelectorAll('.activity,.main-activity').forEach(card=>{const text=(card.textContent||'').toLowerCase();const first=spots.findIndex(s=>s.match.some(m=>text.includes(m.toLowerCase())));if(first<0)return;const actions=card.querySelector('.actions');if(!actions||actions.querySelector('.photo-guide-trigger'))return;const b=document.createElement('button');b.type='button';b.className='action photo-guide-trigger';b.textContent='◎ Photo Spots';b.onclick=()=>openGuide(first);actions.appendChild(b)})}
+enhanceCards();new MutationObserver(enhanceCards).observe(document.querySelector('main.app'),{childList:true,subtree:true});
+document.querySelector('.photo-guide-fab').onclick=()=>openGuide(0);
 guide.querySelector('.photo-guide-back').onclick=closeGuide;
 guide.querySelector('.photo-guide-prev').onclick=()=>{if(index>0){index--;render();guide.scrollTo(0,0)}};
 guide.querySelector('.photo-guide-next').onclick=()=>{index=index===spots.length-1?0:index+1;render();guide.scrollTo(0,0)};
