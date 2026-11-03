@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '2026-11-02-pwa-1';
+const VERSION = '2026-11-03-photo-guide-2';
 const PREFIX = 'sg-visit-2026-';
 const SHELL = PREFIX + 'shell-' + VERSION;
 const PHOTOS = PREFIX + 'photos-' + VERSION;
