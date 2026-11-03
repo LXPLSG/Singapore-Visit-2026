@@ -174,13 +174,22 @@ laupasat:'https://cdn.sanity.io/images/nxpteyfv/goguides/cd08f21ccfdfa92e0dd70a2
 kampong:'https://wonderwall.sg/images/default-source/content/dam/wonderwall/images/2024/04/national-monuments-of-singapore-sultan-mosque/national_monuments_sultan_mosque_lead.jpg',
 chinchin:'https://farm2.staticflickr.com/1702/26424310890_a31159b6e4_b.jpg',
 civic:'https://www.roots.gov.sg/-/media/Roots/Images/monuments/048-former-convent-of-the-holy-infant-jesus-chapel-and-caldwell-house/former-chij-and-caldwell-house-03.png',
+hillstreet:'https://commons.wikimedia.org/wiki/Special:FilePath/Old%20Hill%20Street%20Police%20Station%2C%20October%202025.jpg?width=1200',
 chinatown:'https://stat.ameba.jp/user_images/20240526/00/blackandwhite-104/76/cf/j/o1080081015443370635.jpg',
 dessert:'https://merlion-channel.com/wp-content/uploads/SnowIce_Desserts.jpg',
 clarke:'https://www.explorebees.com/uploads/Clarke%20Quay%20%284%29.jpg',
 jumbo:'https://media.timeout.com/images/105697626/750/562/image.jpg'
 };
-const photoSources={jewel:'https://unsplash.com/photos/interior-of-changi-airport-b3ubz8yNlEI',marina:'https://ecospirits.global/press-releases/',gardens:'https://vietnamnet.vn/kinh-nghiem-phat-trien-cong-vien-giua-do-thi-cua-singapore-2077257.html',laupasat:'https://commons.wikimedia.org/wiki/File:Satay_Street_Lau_Pa_Sat_Singapore.jpg',kampong:'https://wonderwall.sg/places/national-monuments-of-singapore-sultan-mosque',chinchin:'https://www.tasteatlas.com/chinchineatinghouse',civic:'https://www.roots.gov.sg/places/places-landing/Places/national-monuments/former-convent-of-the-holy-infant-jesus-chapel-and-caldwell-house-now-chijmes',chinatown:'https://ameblo.jp/blackandwhite-104/entry-12853577990.html',dessert:'https://merlion-channel.com/en/snowice/',clarke:'https://www.explorebees.com/Singapore/attraction/Clarke-Quay/6205',jumbo:'https://www.timeout.com/singapore/things-to-do/the-ultimate-guide-to-marine-parade-and-east-coast-park'};
-const img=(src,label,cls='')=>{const item=days.flatMap(d=>d.items).find(x=>label.startsWith(x.title));const urls=item?[realPhotos[item.id],...(item.id==='chinchin'?['https://1.bp.blogspot.com/-S6-vH5epIBk/U3zAU3pWGII/AAAAAAAAoCo/rMStK0OPJog/s1600/DSC_0027jk.jpg','https://cdn-sg.orstatic.com/userphoto/doorphoto/1/13C/007RR4279FD45615808A48lv.jpg']:item.attractions[0][2])]:[commons(src)];return photoTag(urls,label,cls)};
+const photoSources={jewel:'https://unsplash.com/photos/interior-of-changi-airport-b3ubz8yNlEI',marina:'https://ecospirits.global/press-releases/',gardens:'https://vietnamnet.vn/kinh-nghiem-phat-trien-cong-vien-giua-do-thi-cua-singapore-2077257.html',laupasat:'https://commons.wikimedia.org/wiki/File:Satay_Street_Lau_Pa_Sat_Singapore.jpg',kampong:'https://wonderwall.sg/places/national-monuments-of-singapore-sultan-mosque',chinchin:'https://www.tasteatlas.com/chinchineatinghouse',civic:'https://www.roots.gov.sg/places/places-landing/Places/national-monuments/former-convent-of-the-holy-infant-jesus-chapel-and-caldwell-house-now-chijmes',hillstreet:'https://commons.wikimedia.org/wiki/File:Old_Hill_Street_Police_Station,_October_2025.jpg',chinatown:'https://ameblo.jp/blackandwhite-104/entry-12853577990.html',dessert:'https://merlion-channel.com/en/snowice/',clarke:'https://www.explorebees.com/Singapore/attraction/Clarke-Quay/6205',jumbo:'https://www.timeout.com/singapore/things-to-do/the-ultimate-guide-to-marine-parade-and-east-coast-park'};
+const img=(src,label,cls='')=>{
+  const item=days.flatMap(d=>d.items).find(x=>label.startsWith(x.title));
+  if(!item)return photoTag([commons(src)],label,cls);
+  const alternatives=item.id==='chinchin'
+    ?['https://1.bp.blogspot.com/-S6-vH5epIBk/U3zAU3pWGII/AAAAAAAAoCo/rMStK0OPJog/s1600/DSC_0027jk.jpg','https://cdn-sg.orstatic.com/userphoto/doorphoto/1/13C/007RR4279FD45615808A48lv.jpg']
+    :(item.attractions[0]?.[2]||[]);
+  const urls=[realPhotos[item.id],...alternatives].filter(Boolean);
+  return photoTag(urls.length?urls:[commons(src)],label,cls);
+};
 function loadPhotos(){document.querySelectorAll('img[data-photo]').forEach(el=>{const photo=new Image();photo.referrerPolicy='no-referrer';photo.onload=()=>{el.src=photo.src;el.alt=el.alt.replace('Illustration for ','Photo of ')};photo.src=el.dataset.photo;delete el.dataset.photo})}
 new MutationObserver(()=>{document.querySelectorAll('.activity').forEach(card=>{const button=card.querySelector('button.explore');const match=button&&button.getAttribute('onclick').match(/openDetail\('([^']+)'\)/);if(match&&!card.dataset.introduced){card.dataset.introduced='true';card.querySelector('.summary').textContent=findItem(match[1]).intro}});enhanceGuideViews()}).observe(document.body,{childList:true,subtree:true});
 const maps=(place)=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place+', Singapore')}`;
