@@ -339,7 +339,10 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 .photo-guide-copy{padding:19px}
 .photo-guide-kicker{color:var(--coral);font-size:.73rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
 .photo-guide-copy h2{font-family:Georgia,serif;font-size:1.9rem;line-height:1.05;margin:7px 0 10px}
-.photo-guide-copy p{color:#4f6268;font-size:.92rem;line-height:1.65;margin:8px 0}.photo-guide-directions{display:grid;gap:8px;margin-top:15px}.photo-guide-direction{display:grid;grid-template-columns:76px 1fr;gap:9px;padding:10px 11px;border-radius:13px;background:#f2f7f5;font-size:.84rem;line-height:1.45}.photo-guide-direction b{color:var(--teal2)}
+.photo-guide-copy p{color:#4f6268;font-size:.92rem;line-height:1.65;margin:8px 0}
+.photo-guide-directions{display:grid;gap:8px;margin-top:15px}
+.photo-guide-direction{display:grid;grid-template-columns:76px 1fr;gap:9px;padding:10px 11px;border-radius:13px;background:#f2f7f5;font-size:.84rem;line-height:1.45}
+.photo-guide-direction b{color:var(--teal2)}
 .photo-guide-id{display:inline-block;margin-left:7px;color:var(--muted);font-weight:800}
 .photo-guide-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .photo-guide-links .action{padding:11px 13px}
@@ -350,7 +353,7 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 .photo-guide-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin:14px 0 0}
 .photo-guide-dot{width:8px;height:8px;border:0;padding:0;border-radius:50%;background:#c6d2ce}
 .photo-guide-dot.active{background:var(--teal);transform:scale(1.35)}
-@media(max-width:420px){.photo-guide-master-head h2{font-size:1.7rem}.photo-guide-master-item{grid-template-columns:44px 1fr auto;padding:13px}.photo-guide-master-id{width:44px;height:44px}.photo-guide-copy h2{font-size:1.55rem}.photo-guide-image{height:34vh}.photo-guide-fab{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));padding:12px 14px}.actions .action{flex:1 1 auto;min-height:42px}}
+@media(max-width:420px){.photo-guide-direction{grid-template-columns:58px 1fr}.photo-guide-master-head h2{font-size:1.7rem}.photo-guide-master-item{grid-template-columns:44px 1fr auto;padding:13px}.photo-guide-master-id{width:44px;height:44px}.photo-guide-copy h2{font-size:1.55rem}.photo-guide-image{height:34vh}.photo-guide-fab{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));padding:12px 14px}.actions .action{flex:1 1 auto;min-height:42px}}
 </style>
 <button class="photo-guide-fab" type="button" aria-label="Open Photo Guide">◎ Photo Guide</button>
 <section id="photoGuide" aria-hidden="true" aria-label="Photo spots guide">
@@ -414,27 +417,59 @@ const spots=[
 {id:'T4',title:'Sri Mariamman Temple',activity:'Chinatown & Buddha Tooth Relic Temple',match:['Chinatown','Buddha Tooth Relic Temple'],image:commons('Gopuram of Sri Mariamman Temple Singapore 1.jpg'),source:commonsPage('Gopuram of Sri Mariamman Temple Singapore 1.jpg'),view:'Stand across South Bridge Road and centre the colourful gopuram above the entrance. A portrait-oriented frame preserves the tower’s height and sculptural detail.',map:'Sri Mariamman Temple Singapore'}
 ];
 const shooting={
-J1:{stand:'Level 1 Forest Valley path at the circular basin, on the side with the clearest uninterrupted railing.',face:'Straight toward the centre of the Rain Vortex and its round basin.',angle:'Use 0.5× in portrait orientation; hold the phone around chest height and tilt up about 15° to include the roof opening.',standMap:'Jewel Rain Vortex Level 1 Forest Valley'},
-J2:{stand:'An upper-level Forest Valley railing on Level 4 or 5, directly opposite the waterfall.',face:'Across the atrium toward the full waterfall drop and roof oculus.',angle:'Use 1× in portrait; keep the railing below the frame and tilt down slightly so the basin remains visible.',standMap:'Jewel Changi Forest Valley Level 5 Rain Vortex'},
-M2:{stand:'The Helix Bridge landing beside the waterfront promenade, where the museum is separated from the hotel towers.',face:'Toward the lotus-shaped ArtScience Museum across the water edge.',angle:'Use 1× landscape at eye level; keep the horizon straight and leave water beneath the museum for a reflection.',standMap:'Helix Bridge ArtScience Museum viewpoint'},
-M7:{stand:'Midway along Garden Bay Bridge, clear of the main pedestrian flow.',face:'Along the bridge toward the three Marina Bay Sands towers.',angle:'Use 1× landscape at waist-to-chest height; centre the walkway so its rails form leading lines.',standMap:'Garden Bay Bridge Singapore'},
-G1:{stand:'On the open plaza near the centre of Supertree Grove, several metres from the nearest trunk.',face:'Toward the tallest cluster of Supertrees, with at least three canopies visible.',angle:'Use 0.5× portrait from a low chest-height position and tilt upward 25–35° for converging trunks.',standMap:'Supertree Grove central plaza'},
-G7:{stand:'At the pond-edge path where the lilies fill the foreground and the skyline is unobstructed.',face:'Across the pond toward the Supertrees and Marina Bay Sands.',angle:'Hold the phone low, about waist height, use 0.5× landscape and keep one-third of the frame as water.',standMap:'Water Lily Pond Gardens by the Bay'},
-L1:{stand:'On the opposite pavement at the Raffles Quay side, using a marked crossing and staying behind the kerb.',face:'Toward Lau Pa Sat’s clock tower and main octagonal roofline.',angle:'Use 0.5× landscape at eye level; keep vertical walls straight and include the surrounding towers for contrast.',standMap:'Lau Pa Sat Raffles Quay entrance'},
-K1:{stand:'At the Baghdad Street end of the pedestrian section of Bussorah Street.',face:'Down the centre of Bussorah Street toward Sultan Mosque’s golden dome.',angle:'Use 1× portrait at chest height; centre the dome and use the two shophouse rows as a symmetrical frame.',standMap:'Bussorah Street Baghdad Street Singapore'},
-K3:{stand:'Across the lane from one complete mural, leaving enough room for pedestrians to pass.',face:'Perpendicular to the mural rather than diagonally along the lane.',angle:'Use 1× landscape at the mural’s mid-height; keep the phone level to avoid distorted doorways and walls.',standMap:'Haji Lane street art Singapore'},
-V1:{stand:'On the open CHIJMES lawn or courtyard directly in front of the chapel façade.',face:'Toward the centre door and main spire.',angle:'Use 1× portrait from slightly below eye level; tilt up only 5–10° and leave space above the spire.',standMap:'CHIJMES lawn Singapore'},
-V6:{stand:'On the opposite pavement near the Hill Street–River Valley Road junction, behind the kerb or at the marked crossing.',face:'Squarely toward the long coloured-shutter façade.',angle:'Use 0.5× landscape at eye level; keep the phone perfectly level so windows and columns remain vertical.',standMap:'Old Hill Street Police Station Hill Street viewpoint'},
-T1:{stand:'Near the Maxwell MRT entrance on the opposite side of South Bridge Road, using the pavement by the marked crossing.',face:'Toward the temple’s complete red front façade.',angle:'Use 1× portrait at eye level; keep the façade centred and include the roof finial without excessive sky.',standMap:'Maxwell MRT Buddha Tooth Relic Temple viewpoint'},
-T4:{stand:'On the opposite pavement of South Bridge Road, aligned with the temple entrance and clear of shopfront doors.',face:'Straight toward the entrance and colourful gopuram.',angle:'Use 1× portrait from chest height; tilt upward about 10° and keep both lower gateposts visible.',standMap:'Sri Mariamman Temple South Bridge Road entrance'}
+  J1:{stand:'Level 1 Forest Valley path at the circular basin, on the side with the clearest uninterrupted railing.',face:'Straight toward the centre of the Rain Vortex and its round basin.',angle:'Use 0.5× in portrait orientation; hold the phone around chest height and tilt up about 15° to include the roof opening.',standMap:'Jewel Rain Vortex Level 1 Forest Valley'},
+  J2:{stand:'An upper-level Forest Valley railing on Level 4 or 5, directly opposite the waterfall.',face:'Across the atrium toward the full waterfall drop and roof oculus.',angle:'Use 1× in portrait; keep the railing below the frame and tilt down slightly so the basin remains visible.',standMap:'Jewel Changi Forest Valley Level 5 Rain Vortex'},
+  M2:{stand:'The Helix Bridge landing beside the waterfront promenade, where the museum is separated from the hotel towers.',face:'Toward the lotus-shaped ArtScience Museum across the water edge.',angle:'Use 1× landscape at eye level; keep the horizon straight and leave water beneath the museum for a reflection.',standMap:'Helix Bridge ArtScience Museum viewpoint'},
+  M7:{stand:'Midway along Garden Bay Bridge, clear of the main pedestrian flow.',face:'Along the bridge toward the three Marina Bay Sands towers.',angle:'Use 1× landscape at waist-to-chest height; centre the walkway so its rails form leading lines.',standMap:'Garden Bay Bridge Singapore'},
+  G1:{stand:'On the open plaza near the centre of Supertree Grove, several metres from the nearest trunk.',face:'Toward the tallest cluster of Supertrees, with at least three canopies visible.',angle:'Use 0.5× portrait from a low chest-height position and tilt upward 25–35° for converging trunks.',standMap:'Supertree Grove central plaza'},
+  G7:{stand:'At the pond-edge path where the lilies fill the foreground and the skyline is unobstructed.',face:'Across the pond toward the Supertrees and Marina Bay Sands.',angle:'Hold the phone low, about waist height, use 0.5× landscape and keep one-third of the frame as water.',standMap:'Water Lily Pond Gardens by the Bay'},
+  L1:{stand:'On the opposite pavement at the Raffles Quay side, using a marked crossing and staying behind the kerb.',face:'Toward Lau Pa Sat’s clock tower and main octagonal roofline.',angle:'Use 0.5× landscape at eye level; keep vertical walls straight and include the surrounding towers for contrast.',standMap:'Lau Pa Sat Raffles Quay entrance'},
+  K1:{stand:'At the Baghdad Street end of the pedestrian section of Bussorah Street.',face:'Down the centre of Bussorah Street toward Sultan Mosque’s golden dome.',angle:'Use 1× portrait at chest height; centre the dome and use the two shophouse rows as a symmetrical frame.',standMap:'Bussorah Street Baghdad Street Singapore'},
+  K3:{stand:'Across the lane from one complete mural, leaving enough room for pedestrians to pass.',face:'Perpendicular to the mural rather than diagonally along the lane.',angle:'Use 1× landscape at the mural’s mid-height; keep the phone level to avoid distorted doorways and walls.',standMap:'Haji Lane street art Singapore'},
+  V1:{stand:'On the open CHIJMES lawn or courtyard directly in front of the chapel façade.',face:'Toward the centre door and main spire.',angle:'Use 1× portrait from slightly below eye level; tilt up only 5–10° and leave space above the spire.',standMap:'CHIJMES lawn Singapore'},
+  V6:{stand:'On the opposite pavement near the Hill Street–River Valley Road junction, behind the kerb or at the marked crossing.',face:'Squarely toward the long coloured-shutter façade.',angle:'Use 0.5× landscape at eye level; keep the phone perfectly level so windows and columns remain vertical.',standMap:'Old Hill Street Police Station Hill Street viewpoint'},
+  T1:{stand:'Near the Maxwell MRT entrance on the opposite side of South Bridge Road, using the pavement by the marked crossing.',face:'Toward the temple’s complete red front façade.',angle:'Use 1× portrait at eye level; keep the façade centred and include the roof finial without excessive sky.',standMap:'Maxwell MRT Buddha Tooth Relic Temple viewpoint'},
+  T4:{stand:'On the opposite pavement of South Bridge Road, aligned with the temple entrance and clear of shopfront doors.',face:'Straight toward the entrance and colourful gopuram.',angle:'Use 1× portrait from chest height; tilt upward about 10° and keep both lower gateposts visible.',standMap:'Sri Mariamman Temple South Bridge Road entrance'}
 };
 if(typeof addTranslation==='function'){
-addTranslation('◎ Photo Guide','◎ 拍照指南');addTranslation('◎ Photo Spots','◎ 拍照地点');addTranslation('← Return to itinerary','← 返回行程');addTranslation('← All photo spots','← 所有拍照地点');addTranslation('Photo guide','拍照指南');addTranslation('All photo spots','所有拍照地点');addTranslation('Photo spot','拍照地点');addTranslation('↗ Standing point','↗ 拍摄位置');addTranslation('Photo source ↗','照片来源 ↗');addTranslation('← Previous','← 上一个');addTranslation('Next →','下一个 →');addTranslation('Back to first','返回第一个');
+addTranslation('◎ Photo Guide','◎ 拍照指南');
+addTranslation('◎ Photo Spots','◎ 拍照地点');
+addTranslation('← Return to itinerary','← 返回行程');
+addTranslation('← All photo spots','← 所有拍照地点');
+addTranslation('Photo guide','拍照指南');
+addTranslation('All photo spots','所有拍照地点');
+addTranslation('Photo spot','拍照地点');
+addTranslation('Stand','站位');
+addTranslation('Face','朝向');
+addTranslation('Angle','角度');
+addTranslation('↗ Standing point','↗ 拍摄位置');
+addTranslation('Photo source ↗','照片来源 ↗');
+addTranslation('← Previous','← 上一个');
+addTranslation('Next →','下一个 →');
+addTranslation('Back to first','返回第一个');
 }
 const guide=document.getElementById('photoGuide'),master=guide.querySelector('.photo-guide-master'),detail=guide.querySelector('.photo-guide-detail'),masterList=guide.querySelector('.photo-guide-master-list'),img=guide.querySelector('.photo-guide-image'),title=guide.querySelector('.photo-guide-copy h2'),activity=guide.querySelector('.photo-guide-activity'),viewpoint=guide.querySelector('.photo-guide-viewpoint'),stand=guide.querySelector('.photo-guide-stand'),face=guide.querySelector('.photo-guide-face'),angle=guide.querySelector('.photo-guide-angle'),count=guide.querySelector('.photo-guide-count'),id=guide.querySelector('.photo-guide-id'),map=guide.querySelector('.photo-guide-map'),ref=guide.querySelector('.photo-guide-reference'),dots=guide.querySelector('.photo-guide-dots'),back=guide.querySelector('.photo-guide-back');
 let index=0,mode='master',returnFocus=null;
 const encode=q=>encodeURIComponent(q);
-function render(){const s=spots[index];title.textContent=s.title;activity.textContent=s.activity;viewpoint.textContent=s.view;const shot=shooting[s.id];stand.textContent=shot.stand;face.textContent=shot.face;angle.textContent=shot.angle;id.textContent=s.id;count.textContent=(index+1)+' / '+spots.length;map.href='https://www.google.com/maps/search/?api=1&query='+encode(shot.standMap);ref.href=s.source;img.src=s.image;img.alt=s.title+' reference photograph';guide.querySelector('.photo-guide-prev').disabled=index===0;guide.querySelector('.photo-guide-next').textContent=index===spots.length-1?'Back to first':'Next →';dots.querySelectorAll('button').forEach((d,i)=>d.classList.toggle('active',i===index))}
+function render(){
+  const s=spots[index];
+  const shot=shooting[s.id];
+  title.textContent=s.title;
+  activity.textContent=s.activity;
+  viewpoint.textContent=s.view;
+  stand.textContent=shot.stand;
+  face.textContent=shot.face;
+  angle.textContent=shot.angle;
+  id.textContent=s.id;
+  count.textContent=(index+1)+' / '+spots.length;
+  map.href='https://www.google.com/maps/search/?api=1&query='+encode(shot.standMap);
+  ref.href=s.source;
+  img.src=s.image;
+  img.alt=s.title+' reference photograph';
+  guide.querySelector('.photo-guide-prev').disabled=index===0;
+  guide.querySelector('.photo-guide-next').textContent=index===spots.length-1?'Back to first':'Next →';
+  dots.querySelectorAll('button').forEach((d,i)=>d.classList.toggle('active',i===index));
+}
 function showMaster(){mode='master';master.hidden=false;detail.hidden=true;back.textContent='← Return to itinerary';count.textContent=spots.length+' photo spots';guide.scrollTo(0,0)}
 function showDetail(i=0){mode='detail';index=i;master.hidden=true;detail.hidden=false;back.textContent='← All photo spots';render();guide.scrollTo(0,0)}
 function openMaster(){returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';showMaster();back.focus()}
