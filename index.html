@@ -321,6 +321,17 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 .photo-guide-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .photo-guide-back{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:11px 14px;font-weight:850}
 .photo-guide-count{color:var(--teal);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.photo-guide-master-head{padding:10px 4px 16px}
+.photo-guide-master-head .eyebrow{color:var(--teal)}
+.photo-guide-master-head h2{font-family:Georgia,serif;font-size:2rem;line-height:1.04;margin:7px 0 8px}
+.photo-guide-master-head p{margin:0;color:var(--muted);line-height:1.5}
+.photo-guide-master-list{display:grid;gap:10px}
+.photo-guide-master-item{width:100%;border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;text-align:left;color:var(--ink);box-shadow:0 6px 16px rgba(8,40,43,.05)}
+.photo-guide-master-id{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#e7f3f0;color:var(--teal2);font-weight:900}
+.photo-guide-master-copy strong{display:block;font-family:Georgia,serif;font-size:1.05rem;line-height:1.15}
+.photo-guide-master-copy span{display:block;color:var(--muted);font-size:.76rem;margin-top:4px}
+.photo-guide-master-arrow{color:var(--teal);font-size:1.25rem;font-weight:900}
+.photo-guide-detail[hidden],.photo-guide-master[hidden]{display:none}
 .photo-guide-card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
 .photo-guide-image{width:100%;height:min(44vh,360px);object-fit:cover;background:#dbe9e5;display:block}
 .photo-guide-copy{padding:19px}
@@ -337,7 +348,7 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
 .photo-guide-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin:14px 0 0}
 .photo-guide-dot{width:8px;height:8px;border:0;padding:0;border-radius:50%;background:#c6d2ce}
 .photo-guide-dot.active{background:var(--teal);transform:scale(1.35)}
-@media(max-width:420px){.photo-guide-copy h2{font-size:1.55rem}.photo-guide-image{height:34vh}.photo-guide-fab{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));padding:12px 14px}.actions .action{flex:1 1 auto;min-height:42px}}
+@media(max-width:420px){.photo-guide-master-head h2{font-size:1.7rem}.photo-guide-master-item{grid-template-columns:44px 1fr auto;padding:13px}.photo-guide-master-id{width:44px;height:44px}.photo-guide-copy h2{font-size:1.55rem}.photo-guide-image{height:34vh}.photo-guide-fab{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));padding:12px 14px}.actions .action{flex:1 1 auto;min-height:42px}}
 </style>
 <button class="photo-guide-fab" type="button" aria-label="Open Photo Guide">◎ Photo Guide</button>
 <section id="photoGuide" aria-hidden="true" aria-label="Photo spots guide">
@@ -346,24 +357,34 @@ window.__LANGUAGE_TEST__={languageDictionary,zhItems,zhSubs,zhBreakfast,translat
       <button class="photo-guide-back" type="button">← Return to itinerary</button>
       <span class="photo-guide-count"></span>
     </div>
-    <article class="photo-guide-card">
-      <img class="photo-guide-image" alt="">
-      <div class="photo-guide-copy">
-        <div class="photo-guide-kicker">Photo spot <span class="photo-guide-id"></span></div>
-        <h2></h2>
-        <p class="photo-guide-activity"></p>
-        <p class="photo-guide-viewpoint"></p>
-        <div class="photo-guide-links">
-          <a class="action explore photo-guide-map" target="_blank" rel="noopener">↗ Map search</a>
-          <a class="action secondary photo-guide-reference" target="_blank" rel="noopener">Photo source ↗</a>
-        </div>
+    <div class="photo-guide-master">
+      <div class="photo-guide-master-head">
+        <div class="eyebrow">Photo guide</div>
+        <h2>All photo spots</h2>
+        <p>Choose a spot for its exact viewpoint, reference photo and map. Itinerary buttons open the matching attraction directly.</p>
       </div>
-    </article>
-    <div class="photo-guide-nav">
-      <button class="photo-guide-prev" type="button">← Previous</button>
-      <button class="photo-guide-next" type="button">Next →</button>
+      <div class="photo-guide-master-list" aria-label="All photo spots"></div>
     </div>
-    <div class="photo-guide-dots" aria-label="Photo spot navigation"></div>
+    <div class="photo-guide-detail" hidden>
+      <article class="photo-guide-card">
+        <img class="photo-guide-image" alt="">
+        <div class="photo-guide-copy">
+          <div class="photo-guide-kicker">Photo spot <span class="photo-guide-id"></span></div>
+          <h2></h2>
+          <p class="photo-guide-activity"></p>
+          <p class="photo-guide-viewpoint"></p>
+          <div class="photo-guide-links">
+            <a class="action explore photo-guide-map" target="_blank" rel="noopener">↗ Map search</a>
+            <a class="action secondary photo-guide-reference" target="_blank" rel="noopener">Photo source ↗</a>
+          </div>
+        </div>
+      </article>
+      <div class="photo-guide-nav">
+        <button class="photo-guide-prev" type="button">← Previous</button>
+        <button class="photo-guide-next" type="button">Next →</button>
+      </div>
+      <div class="photo-guide-dots" aria-label="Photo spot navigation"></div>
+    </div>
   </div>
 </section>
 <script data-photo-guide-addon>
@@ -386,23 +407,29 @@ const spots=[
 {id:'T4',title:'Sri Mariamman Temple',activity:'Chinatown & Buddha Tooth Relic Temple',match:['Chinatown','Buddha Tooth Relic Temple'],image:commons('Gopuram of Sri Mariamman Temple Singapore 1.jpg'),source:commonsPage('Gopuram of Sri Mariamman Temple Singapore 1.jpg'),view:'Stand across South Bridge Road and centre the colourful gopuram above the entrance. A portrait-oriented frame preserves the tower’s height and sculptural detail.',map:'Sri Mariamman Temple Singapore'}
 ];
 if(typeof addTranslation==='function'){
-addTranslation('◎ Photo Guide','◎ 拍照指南');addTranslation('◎ Photo Spots','◎ 拍照地点');addTranslation('← Return to itinerary','← 返回行程');addTranslation('Photo spot','拍照地点');addTranslation('↗ Map search','↗ 地图搜索');addTranslation('Photo source ↗','照片来源 ↗');addTranslation('← Previous','← 上一个');addTranslation('Next →','下一个 →');addTranslation('Back to first','返回第一个');
+addTranslation('◎ Photo Guide','◎ 拍照指南');addTranslation('◎ Photo Spots','◎ 拍照地点');addTranslation('← Return to itinerary','← 返回行程');addTranslation('← All photo spots','← 所有拍照地点');addTranslation('Photo guide','拍照指南');addTranslation('All photo spots','所有拍照地点');addTranslation('Photo spot','拍照地点');addTranslation('↗ Map search','↗ 地图搜索');addTranslation('Photo source ↗','照片来源 ↗');addTranslation('← Previous','← 上一个');addTranslation('Next →','下一个 →');addTranslation('Back to first','返回第一个');
 }
-const guide=document.getElementById('photoGuide'),img=guide.querySelector('.photo-guide-image'),title=guide.querySelector('h2'),activity=guide.querySelector('.photo-guide-activity'),viewpoint=guide.querySelector('.photo-guide-viewpoint'),count=guide.querySelector('.photo-guide-count'),id=guide.querySelector('.photo-guide-id'),map=guide.querySelector('.photo-guide-map'),ref=guide.querySelector('.photo-guide-reference'),dots=guide.querySelector('.photo-guide-dots');
-let index=0,returnFocus=null;
+const guide=document.getElementById('photoGuide'),master=guide.querySelector('.photo-guide-master'),detail=guide.querySelector('.photo-guide-detail'),masterList=guide.querySelector('.photo-guide-master-list'),img=guide.querySelector('.photo-guide-image'),title=guide.querySelector('.photo-guide-copy h2'),activity=guide.querySelector('.photo-guide-activity'),viewpoint=guide.querySelector('.photo-guide-viewpoint'),count=guide.querySelector('.photo-guide-count'),id=guide.querySelector('.photo-guide-id'),map=guide.querySelector('.photo-guide-map'),ref=guide.querySelector('.photo-guide-reference'),dots=guide.querySelector('.photo-guide-dots'),back=guide.querySelector('.photo-guide-back');
+let index=0,mode='master',returnFocus=null;
 const encode=q=>encodeURIComponent(q);
 function render(){const s=spots[index];title.textContent=s.title;activity.textContent=s.activity;viewpoint.textContent=s.view;id.textContent=s.id;count.textContent=(index+1)+' / '+spots.length;map.href='https://www.google.com/maps/search/?api=1&query='+encode(s.map);ref.href=s.source;img.src=s.image;img.alt=s.title+' reference photograph';guide.querySelector('.photo-guide-prev').disabled=index===0;guide.querySelector('.photo-guide-next').textContent=index===spots.length-1?'Back to first':'Next →';dots.querySelectorAll('button').forEach((d,i)=>d.classList.toggle('active',i===index))}
-function openGuide(i=0){index=i;returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render();guide.scrollTo(0,0);guide.querySelector('.photo-guide-back').focus()}
+function showMaster(){mode='master';master.hidden=false;detail.hidden=true;back.textContent='← Return to itinerary';count.textContent=spots.length+' photo spots';guide.scrollTo(0,0)}
+function showDetail(i=0){mode='detail';index=i;master.hidden=true;detail.hidden=false;back.textContent='← All photo spots';render();guide.scrollTo(0,0)}
+function openMaster(){returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';showMaster();back.focus()}
+function openGuide(i=0){returnFocus=document.activeElement;guide.classList.add('open');guide.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';showDetail(i);back.focus()}
 function closeGuide(){guide.classList.remove('open');guide.setAttribute('aria-hidden','true');document.body.style.overflow='';returnFocus?.focus()}
-spots.forEach((s,i)=>{const d=document.createElement('button');d.type='button';d.className='photo-guide-dot';d.setAttribute('aria-label','Photo spot '+(i+1)+': '+s.title);d.onclick=()=>{index=i;render();guide.scrollTo({top:0,behavior:'smooth'})};dots.appendChild(d)});
-function enhanceCards(){document.querySelectorAll('.activity,.main-activity').forEach(card=>{const text=(card.textContent||'').toLowerCase();const first=spots.findIndex(s=>s.match.some(m=>text.includes(m.toLowerCase())));if(first<0)return;const actions=card.querySelector('.actions');if(!actions||actions.querySelector('.photo-guide-trigger'))return;const b=document.createElement('button');b.type='button';b.className='action photo-guide-trigger';b.textContent='◎ Photo Spots';b.onclick=()=>openGuide(first);actions.appendChild(b)})}
+spots.forEach((s,i)=>{
+ const item=document.createElement('button');item.type='button';item.className='photo-guide-master-item';item.innerHTML='<span class="photo-guide-master-id">'+s.id+'</span><span class="photo-guide-master-copy"><strong>'+s.title+'</strong><span>'+s.activity+'</span></span><span class="photo-guide-master-arrow">→</span>';item.setAttribute('aria-label',s.id+': '+s.title);item.onclick=()=>showDetail(i);masterList.appendChild(item);
+ const d=document.createElement('button');d.type='button';d.className='photo-guide-dot';d.setAttribute('aria-label','Photo spot '+(i+1)+': '+s.title);d.onclick=()=>{index=i;render();guide.scrollTo({top:0,behavior:'smooth'})};dots.appendChild(d)
+});
+function enhanceCards(){document.querySelectorAll('.activity,.main-activity').forEach(card=>{const text=(card.textContent||'').toLowerCase();const first=spots.findIndex(s=>s.match.some(m=>text.includes(m.toLowerCase())));if(first<0)return;const actions=card.querySelector('.actions');if(!actions||actions.querySelector('.photo-guide-trigger'))return;const b=document.createElement('button');b.type='button';b.className='action photo-guide-trigger';b.textContent='◎ Photo Spots';b.setAttribute('aria-label','Open photo guide for '+spots[first].activity);b.onclick=()=>openGuide(first);actions.appendChild(b)})}
 enhanceCards();new MutationObserver(enhanceCards).observe(document.querySelector('main.app'),{childList:true,subtree:true});
-document.querySelector('.photo-guide-fab').onclick=()=>openGuide(0);
-guide.querySelector('.photo-guide-back').onclick=closeGuide;
+document.querySelector('.photo-guide-fab').onclick=openMaster;
+back.onclick=()=>{if(mode==='detail')showMaster();else closeGuide()};
 guide.querySelector('.photo-guide-prev').onclick=()=>{if(index>0){index--;render();guide.scrollTo(0,0)}};
 guide.querySelector('.photo-guide-next').onclick=()=>{index=index===spots.length-1?0:index+1;render();guide.scrollTo(0,0)};
-document.addEventListener('keydown',e=>{if(!guide.classList.contains('open'))return;if(e.key==='Escape')closeGuide();if(e.key==='ArrowRight')guide.querySelector('.photo-guide-next').click();if(e.key==='ArrowLeft')guide.querySelector('.photo-guide-prev').click()});
-window.__PHOTO_GUIDE_TEST__={spots,openGuide,closeGuide,render,get index(){return index}};
+document.addEventListener('keydown',e=>{if(!guide.classList.contains('open'))return;if(e.key==='Escape'){if(mode==='detail')showMaster();else closeGuide()}if(mode==='detail'&&e.key==='ArrowRight')guide.querySelector('.photo-guide-next').click();if(mode==='detail'&&e.key==='ArrowLeft')guide.querySelector('.photo-guide-prev').click()});
+window.__PHOTO_GUIDE_TEST__={spots,openMaster,openGuide,closeGuide,showMaster,showDetail,render,get index(){return index},get mode(){return mode}};
 })();
 </script>
 
