@@ -447,7 +447,32 @@ const shooting={
   T1:{stand:'Near the Maxwell MRT entrance on the opposite side of South Bridge Road, using the pavement by the marked crossing.',face:'Toward the temple’s complete red front façade.',angle:'Use 1× portrait at eye level; keep the façade centred and include the roof finial without excessive sky.',standMap:'Maxwell MRT Buddha Tooth Relic Temple viewpoint'},
   T4:{stand:'On the opposite pavement of South Bridge Road, aligned with the temple entrance and clear of shopfront doors.',face:'Straight toward the entrance and colourful gopuram.',angle:'Use 1× portrait from chest height; tilt upward about 10° and keep both lower gateposts visible.',standMap:'Sri Mariamman Temple South Bridge Road entrance'}
 };
+const zhPhotoGuide={
+  J1:{title:'星耀樟宜雨漩涡—地面层',activity:'星耀樟宜',view:'在地面层观景区拍摄，将雨漩涡置于圆形水池正上方。使用较宽构图，并保留周围层叠平台以表现规模。',stand:'站在森林谷一楼圆形水池旁、栏杆遮挡最少的一侧。',face:'正对雨漩涡中心及圆形水池。',angle:'使用0.5×竖拍；手机放在胸口高度，向上倾斜约15°，把屋顶开口纳入画面。'},
+  J2:{title:'星耀樟宜雨漩涡—高层',activity:'星耀樟宜',view:'在瀑布对面的高层栏杆拍摄，将屋顶开口与完整水流纳入画面，并避免栏杆进入下方画面。',stand:'站在森林谷四楼或五楼、瀑布正对面的栏杆位置。',face:'隔着中庭面向完整瀑布及屋顶圆形开口。',angle:'使用1×竖拍；让栏杆保持在画面外，并略微向下拍以保留水池。'},
+  M2:{title:'艺术科学博物馆外观',activity:'滨海湾金沙与海滨步道',view:'沿海滨步道稍微横向拍摄莲花形建筑，四周保留空间；水面平静时可纳入倒影。',stand:'站在螺旋桥靠海滨步道的落脚处，让博物馆与酒店大楼分开呈现。',face:'面向水边的莲花形艺术科学博物馆。',angle:'使用1×横拍并保持视线水平；让博物馆下方保留水面，方便拍到倒影。'},
+  M7:{title:'花园湾桥',activity:'滨海湾金沙与海滨步道',view:'利用花园湾桥的线条拍摄通往金沙酒店或花园天际线的画面，并保持桥梁线条笔直。',stand:'站在花园湾桥中段，不要挡住主要人流。',face:'沿桥面朝向滨海湾金沙三座大楼。',angle:'使用1×横拍，手机放在腰部至胸口高度；让两侧栏杆形成居中的引导线。'},
+  G1:{title:'擎天树丛',activity:'滨海湾花园',view:'站在树丛中央附近向上拍摄，让数棵擎天树在画面中汇聚；拍人物时将人物放在较低位置。',stand:'站在擎天树丛中央广场，距离最近的树干数米。',face:'面向最高的一组擎天树，确保至少看见三座树冠。',angle:'使用0.5×竖拍，手机放在较低的胸口位置，向上倾斜25–35°。'},
+  G7:{title:'睡莲池',activity:'滨海湾花园',view:'以睡莲作前景，隔着池塘拍摄擎天树与滨海湾金沙；手机位置稍低以分开花朵和天际线。',stand:'站在池边步道上，选择睡莲充当前景且天际线无遮挡的位置。',face:'越过池塘面向擎天树与滨海湾金沙。',angle:'手机放在腰部附近，使用0.5×横拍，让水面占画面约三分之一。'},
+  L1:{title:'老巴刹外观',activity:'老巴刹与沙爹街',view:'从街道对面拍摄完整八角形市场及钟楼，并以周围现代高楼表现新旧建筑对比。',stand:'站在莱佛士码头一侧的对面行人道，使用有标线的过路处并留在路缘后方。',face:'面向老巴刹钟楼及主要八角形屋顶。',angle:'使用0.5×横拍并保持视线水平；保持墙体垂直，同时纳入周围高楼。'},
+  K1:{title:'从巴梭拉街拍摄苏丹回教堂',activity:'甘榜格南文化漫步',view:'从巴梭拉街步行段居中拍摄，以两排店屋包围金色穹顶；适度变焦可压缩街道与清真寺。',stand:'站在巴梭拉街步行段靠巴格达街的一端。',face:'沿巴梭拉街中央面向苏丹回教堂金色穹顶。',angle:'使用1×竖拍，手机放在胸口高度；将穹顶置中，并以两排店屋形成对称边框。'},
+  K3:{title:'哈芝巷街头艺术',activity:'甘榜格南文化漫步',view:'选择一幅完整壁画作为背景，不必拍下整条巷子；构图时保持门口与行人通道畅通。',stand:'站在一幅完整壁画的对面，为其他行人保留通过空间。',face:'垂直正对壁画，不要沿巷子斜拍。',angle:'使用1×横拍，手机位于壁画中部高度；保持水平，避免门窗和墙面变形。'},
+  V1:{title:'赞美广场礼拜堂',activity:'市政区历史建筑漫步',view:'从开阔草坪拍摄白色哥特式礼拜堂，尖塔四周保留空间；稍低视角可减少附近建筑干扰。',stand:'站在赞美广场草坪或庭院中，正对礼拜堂外墙。',face:'面向中央大门与主尖塔。',angle:'使用1×竖拍，手机略低于眼睛；只向上倾斜5–10°，并在尖塔上方留出空间。'},
+  V6:{title:'旧禧街警察局',activity:'旧禧街警察局',view:'从禧街对面安全位置拍摄，保持手机水平，使长形外墙与彩色百叶窗排列笔直。',stand:'站在禧街与河谷路交界附近的对面行人道，留在路缘后方或有标线的过路处。',face:'正对彩色百叶窗的长形外墙。',angle:'使用0.5×横拍并保持眼睛高度；手机必须水平，让窗户与立柱保持垂直。'},
+  T1:{title:'佛牙寺龙华院',activity:'牛车水与佛牙寺龙华院',view:'从桥南路对面拍摄完整红色外墙，或从硕莪街取景形成街道层次；只在有标线处过马路。',stand:'站在麦士威地铁站出口附近、桥南路对面的行人道和有标线过路处旁。',face:'面向寺庙完整的红色正面外墙。',angle:'使用1×竖拍并保持眼睛高度；将外墙置中，纳入屋顶顶饰但减少多余天空。'},
+  T4:{title:'马里安曼兴都庙',activity:'牛车水与佛牙寺龙华院',view:'从桥南路对面拍摄，将色彩丰富的门塔置于入口正上方；竖幅能保留高度与雕塑细节。',stand:'站在桥南路对面行人道，与寺庙入口对齐并避开店铺门口。',face:'正对入口与彩色门塔。',angle:'使用1×竖拍，手机放在胸口高度并向上倾斜约10°；保留下方两侧门柱。'}
+};
 if(typeof addTranslation==='function'){
+Object.entries(zhPhotoGuide).forEach(([spotId,zh])=>{
+  const spot=spots.find(s=>s.id===spotId);
+  const shot=shooting[spotId];
+  addTranslation(spot.title,zh.title);
+  addTranslation(spot.activity,zh.activity);
+  addTranslation(spot.view,zh.view);
+  addTranslation(shot.stand,zh.stand);
+  addTranslation(shot.face,zh.face);
+  addTranslation(shot.angle,zh.angle);
+});
 addTranslation('◎ Photo Guide','◎ 拍照指南');
 addTranslation('◎ Photo Spots','◎ 拍照地点');
 addTranslation('← Return to itinerary','← 返回行程');
@@ -463,6 +488,9 @@ addTranslation('Photo source ↗','照片来源 ↗');
 addTranslation('← Previous','← 上一个');
 addTranslation('Next →','下一个 →');
 addTranslation('Back to first','返回第一个');
+addTranslation('13 photo spots','13个拍照地点');
+addTranslation('Choose a spot for its exact viewpoint, reference photo and map. Itinerary buttons open the matching attraction directly.','选择拍照地点，查看准确机位、参考照片和地图。行程中的按钮会直接打开对应景点。');
+addTranslation('Shooting directions','拍摄方向');
 }
 const guide=document.getElementById('photoGuide'),master=guide.querySelector('.photo-guide-master'),detail=guide.querySelector('.photo-guide-detail'),masterList=guide.querySelector('.photo-guide-master-list'),img=guide.querySelector('.photo-guide-image'),title=guide.querySelector('.photo-guide-copy h2'),activity=guide.querySelector('.photo-guide-activity'),viewpoint=guide.querySelector('.photo-guide-viewpoint'),stand=guide.querySelector('.photo-guide-stand'),face=guide.querySelector('.photo-guide-face'),angle=guide.querySelector('.photo-guide-angle'),count=guide.querySelector('.photo-guide-count'),id=guide.querySelector('.photo-guide-id'),map=guide.querySelector('.photo-guide-map'),ref=guide.querySelector('.photo-guide-reference'),dots=guide.querySelector('.photo-guide-dots'),back=guide.querySelector('.photo-guide-back');
 let index=0,mode='master',returnFocus=null;
